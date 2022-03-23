@@ -2,6 +2,7 @@ package main
 
 import (
 	"fiber_intro/database"
+	"fiber_intro/router"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -12,11 +13,8 @@ func main() {
 
 	database.ConnectDB()
 
-	// Send a string back for GET calls to the endpoint "/"
-	app.Get("/", func(c *fiber.Ctx) error {
-		err := c.SendString("Its nuking!")
-		return err
-	})
+	// Setup the router
+	router.SetupRoutes(app)
 
 	// Listen on PORT 300
 	app.Listen(":3000")
